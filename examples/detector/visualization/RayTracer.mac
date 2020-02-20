@@ -1,8 +1,7 @@
-/geometry/source NaI.tg
+/geometry/source ../gears.tg
+
 /run/initialize
 
-/vis/ASCIITree/verbose 13
-/vis/drawTree
 /geometry/test/run
 /vis/geometry/list
 
@@ -10,7 +9,7 @@
 /vis/viewer/set/background ! ! ! 0
 /vis/viewer/set/upThetaPhi 10 0
 /vis/viewer/set/viewpointThetaPhi 60 0
+/vis/viewer/set/style surface
 /vis/drawVolume
-/vis/scene/add/axes 0 0 0 10 cm
 /vis/viewer/refresh
-/vis/viewer/flush
+#/vis/rayTracer/trace gears.jpeg
