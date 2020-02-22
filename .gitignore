@@ -1,3 +1,7 @@
+# webpage related
+_site
+*jekyll*
+
 # visualization files
 .DAWN*
 *.heprep

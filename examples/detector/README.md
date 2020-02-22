@@ -1,8 +1,34 @@
 ## Detector visualization
-[Geant4 Book For Application Developers](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Visualization/visualization.html)
+The [visualization chapter](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Visualization/visualization.html) of the [Geant4 Book For Application Developers](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html) documents in detail how to visualize a detector using various tools.
 
-- [ASCIITree](visualization/ASCIITree.mac)
-- [RayTracer](visualization/RayTracer.mac)
+- [ASCIITree](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/ASCIITree.mac)
+- [RayTracer](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/RayTracer.mac)
+
+### OpenGL
+
+- [OpenGL](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/OpenGL.mac)
+
+
+For Mac users, please run
+
+```sh
+defaults write org.macosforge.xquartz.X11 enable_iglx -bool true
+```
+
+in a terminal to enable `iglx` for XQuartz if you encounter the following error message when running `gears OpenGL.mac`:
+
+```
+libGL error: No matching fbConfigs or visuals found
+libGL error: failed to load driver: swrast
+X Error of failed request:  GLXBadContext
+  Major opcode of failed request:  149 (GLX)
+...
+```
+
+References:
+
+- <https://www.hoffman2.idre.ucla.edu/access/x11_forwarding/#Mac_OS_X>
+- <https://www.xquartz.org/releases/XQuartz-2.7.10.html>
 
 ## Detector construction
 ### Geometry
@@ -105,3 +131,16 @@ One can use the following syntax to define a [G4LogicalBorderSurface][] in case 
 
 Note that physics volumes from the same logical volume created by the text geometry processor share the same name as their logical volume. Since [G4LogicalBorderSurface][] requires pointers to the two physical volumes beside, a unique copy number has to be attached to the volume name to uniquely identify the physics volume.
 
+[GEARS]: http://physino.xyz/gears
+[tg]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomASCII.html
+[Geant4]: http://geant4.cern.ch
+[NIST]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html#g4matrdb
+[run]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_run_.html
+[listMaterials]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_material_nist_.html
+[G4OpBoundaryProcess]: http://www-geant4.kek.jp/lxr/source//processes/optical/include/G4OpBoundaryProcess.hh
+[PostStepDoIt]: http://www.apc.univ-paris7.fr/~franco/g4doxy4.10/html/class_g4_op_boundary_process.html#a70a65cc5127a05680a0c4679f8300871
+[G4LogicalBorderSurface]: http://www-geant4.kek.jp/lxr/source/geometry/volumes/include/G4LogicalBorderSurface.hh
+[GDML]: https://gdml.web.cern.ch/GDML/
+[md]: https://en.wikipedia.org/wiki/Markdown
+[HTML]: https://www.w3schools.com/html/
+[ROOT]: https://root.cern.ch
