@@ -1,0 +1,7 @@
+:volu hall BOX 5*m 5*m 5*m G4_WATER
+:volu base TORUS 5*cm 8*cm 15*cm 20 250 G4_Ge
+:rotm r000 0 90 0
+:place base 1 hall r000 0 0 0
+
+:color base 0.2 0.4 0.6
+:vis hall OFF
