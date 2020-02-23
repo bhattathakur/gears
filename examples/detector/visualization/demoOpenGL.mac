@@ -16,4 +16,4 @@
 /vis/viewer/flush
 
 /vis/ogl/set/exportFormat pdf
-/vis/ogl/export gears
+/vis/ogl/export ogl
