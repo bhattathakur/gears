@@ -1,0 +1,12 @@
+:volu hall BOX 1.5*m 1.5*m 1.5*m G4_WATER
+:volu base TUBE 0*cm 20*cm 30*cm G4_Ge
+:volu base1 TUBE 0*cm 20*cm 30*cm G4_Ge
+:rotm r000 0 0 0
+:rotm r100 0 90 90
+:place base 1 hall r000 0 0 0
+:place base1 1 hall r100 0 0 0
+
+:color hall 0.5 0.5  0.5 0.1
+:color base 0.5 0. 0. 0.3 1
+:color base1 0.1 0. 0.4 1
+:vis hall OFF
