@@ -1,0 +1,10 @@
+:volu hall BOX 1.5*m 1.5*m 1.5*m G4_WATER
+:SOLID box BOX 20*cm 30*cm 40*cm 
+:SOLID cyl TUBS 0 50*mm 50*mm 0 360
+:rotm r000 0 0 0
+:rotm r100 0 0 0
+:SOLID myunion SUBTRACTION box cyl r000 0 0 0 
+:volu com myunion G4_BRASS
+:place com 1 hall r100 0 0 0
+:color com 0.5 0.2 0.1
+:vis hall OFF

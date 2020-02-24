@@ -1,0 +1,16 @@
+:volu hall BOX 5*m 5*m 5*m G4_WATER
+:volu sphere SPHERE 0*cm 8*cm 0 360 0 90 G4_Ge
+:volu sphere1 SPHERE 0*cm 8*cm 0 360 0 90 G4_Ge
+:volu cylinder TUBE 0*cm 8*cm 50 G4_Ge
+:rotm r000 0 0 0
+:rotm r100 0 0 0
+:rotm r200 180 0 0
+:place sphere 1 hall r000 0 0 50
+:place sphere1 1 hall r200 0 0 -50
+:place cylinder 1 hall r100 0 0 0
+:color sphere 0.2 0.4 0.6
+:color sphere1 0.2 0.5 0.8
+:color cylinder 0.4 0.4 0.6
+:vis hall OFF
+:vis cylinder ON
+:vis sphere ON
