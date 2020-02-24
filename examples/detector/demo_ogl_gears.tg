@@ -9,4 +9,4 @@
 :color hall 0.5 0.5  0.5 0.1
 :color base 0.5 0. 0. 0.3 1
 :color base1 0.1 0. 0.4 1
-:vis hall OFF
+#:vis hall OFF
