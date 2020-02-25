@@ -13,6 +13,9 @@ _site
 *.pdf
 user.properties
 *.gif
+*.zip
+*.wrl
+*.jar
 
 # Executables
 gears
