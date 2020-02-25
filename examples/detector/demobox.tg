@@ -1,5 +1,5 @@
 :volu hall BOX 5*m 5*m 5*m G4_WATER
-:volu base TWISTED_BOX 30 5*cm 8*cm 15*cm  G4_Ge
+:volu base TWISTEDBOX 30*deg 50*cm 80*cm 150*cm  G4_Ge
 :rotm r000 0 0 0
 :place base 1 hall r000 0 0 0
 
