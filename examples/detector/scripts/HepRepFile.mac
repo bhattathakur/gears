@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/geometry/source ../solidtg/demoboolean.tg
-=======
-/geometry/source ../solidtg/tetrahedron.tg
->>>>>>> 912a072c3b2a0bb70d2b61db0b4f77b18c8bc480
+/geometry/source onion.tg
 
 /run/initialize
 
