@@ -12,7 +12,7 @@ The [ASCIITree](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/For
 
 If your geometry is complicated, you can specify the volume to be printed following the instruction [here](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Visualization/AllResources/Control/UIcommands/_vis_ASCIITree_.html).
 
-A [sample ASCIITree macro](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/ASCIITree.mac) is shipped with [GERAS][]. Try it out this way:
+A [sample ASCIITree macro](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/ASCIITree.mac) is shipped with [GEARS][]. Try it out this way:
 
 ```sh
 $ cd /path/to/gears
@@ -96,7 +96,7 @@ $ gears HepRepFile.mac
 It generates `G4Data0.heprep` in the same directory. A shell script [hv](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/hv) is shipped with [GEARS][]. Run it this way:
 
 ```sh
-$ hv G4Data0.heprep
+$ ./hv G4Data0.heprep
 ```
 
 If this is the first time you run it, it will download a `HepRApp.jar` file from the Internet and run it the following way:
@@ -128,7 +128,7 @@ It generates `scene-0.heprep.zip` in the same directory, which can be directly o
 
 ### VRML
 
-[VRML][] is available in any [Geant4][] installation. It is used to generate files in VRML format, which can be viewed using an external program, such as [OpenVRML][], [view3dscene][], etc., or be converted to its succeeder [X3D][].
+[VRML][] is available in any [Geant4][] installation. It is used to generate files in VRML format, which can be viewed using an external program, such as [ORBISNAP][], [OpenVRML][], [view3dscene][], etc., or be converted to its succeeder [X3D][], which can be viewed directly in a modern web browser that supports WebGL.
 
 A [sample VRML macro](https://github.com/jintonic/gears/blob/master/examples/detector/visualization/VRML.mac) is shipped with [GEARS][]. Try it out this way:
 
@@ -138,16 +138,20 @@ $ cd examples/detector/visualization
 $ gears VRML.mac
 ```
 
-It generates `g4_00.wrl` in the same directory.
+It generates `g4_??.wrl` in the same directory.
+
+A shell script [v2x][] is shipped in the same directory to convert the latest `g4_??.wrl` to `g4_??.x3d`, embed the latter to `g4_??.html` and run a simple http server using python3 in the current directory. Open <http://127.0.0.1/8888/g4_??.html> in a modern browser to see the result.
 
 [VRML]:http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Visualization/visdrivers.html#vrml
+[ORBISNAP]:https://www.orbisnap.com/download2.html
 [OpenVRML]:https://sourceforge.net/projects/openvrml/
 [view3dscene]:https://castle-engine.sourceforge.io/view3dscene.php
-[X3D]: https://stackoverflow.com/questions/14849593/vrml-to-x3d-conversion
+[X3D]:https://stackoverflow.com/questions/14849593/vrml-to-x3d-conversion
+[v2x]:https://github.com/jintonic/gears/blob/master/examples/detector/visualization/v2x
 
 ## Detector construction
 ### Geometry
-[GEARS][] accepts two types of detector geometry descriptions in pure ASCII format as input:
+Instead of using geometry written in C++ as described in detail in the [Geant4 manual](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomSolids.html), [GEARS][] accepts two types of detector geometry descriptions in pure ASCII format as input:
 - [Geant4][] [text geometry description][tg] (recommended)
 - [GDML][] (provided for data analysis and visualization in other tools)
 Their difference is similar to that between [markdown][md] and [HTML][]. The simpler [text geometry description][tg] provided by [Geant4][] is recommended to be used as [GEARS][]'s input given its simplicity and readability. For example, an experimental hall filled with air and of a dimension of 10 x 10 x 10 meters can be easily implemented using the following line:
@@ -156,15 +160,17 @@ Their difference is similar to that between [markdown][md] and [HTML][]. The sim
 :volume hall BOX 5*m 5*m 5*m G4_AIR
 ~~~
 
-For more examples, please check `*.tg` files in the [examples/](https://github.com/jintonic/gears/blob/master/examples/) directory, such as [examples/Rutherford/hall.tg](https://github.com/jintonic/gears/blob/master/examples/Rutherford/hall.tg). The suffix of *.tg* indicates that they are [text geometry][tg] description files. A [Geant4][] macro command `/geometry/source` is added to load geometry files:
+For more examples, please check `*.tg` files in the [examples/detector](https://github.com/jintonic/gears/blob/master/examples/detector) directory, such as [examples/detector/gears.tg](https://github.com/jintonic/gears/blob/master/examples/detector/gears.tg) and [example/detector/solids.tg](https://github.com/jintonic/gears/blob/master/examples/detector/solids.tg). The suffix of *.tg* indicates that they are [text geometry][tg] description files. A [Geant4][] macro command `/geometry/source` is added to load geometry files:
 
-~~~
-/geometry/source examples/Rutherford/foil.tg
+~~~sh
+/geometry/source gears.tg
 ~~~
 
-Alternatively,
+You can utilize [Boolean operation](boolean) or [shell scripts](scripts) to construct more complicated geometries.
 
-~~~
+Alternatively, you can read a [GDML][] file:
+
+~~~sh
 /geometry/source file.gdml
 ~~~
 
@@ -172,20 +178,22 @@ The command must be used before [/run/initialize][run], otherwise [GEARS][] will
 
 [GEARS][] provides the following command to export constructed detector geometry to a [GDML][] file:
 
-~~~
+~~~sh
 /geometry/export output.gdml
 ~~~
 
 This can only be used after the macro command [/run/initialize][run], which constructs the detector geometry before exporting. While the simpler [text geometry description][tg] can only be understood by [Geant4][], [GDML][] can be understood by many other tools. For example, [ROOT][] provides functions to read and visualize [GDML][] geometries. On the other hand, it is not that easy to write a valid [GDML][] file manually. This functionality is provided to enable the following usage:
 
+~~~sh
+ # describe the detector using simple text geometry description
+ /geometry/source input.tg
+ # construct the detector
+ /run/intialize
+ # export detector geometry as GDML for analysis/visualization in other tools
+ /geometry/export output.gdml
 ~~~
-# describe the detector using simple text geometry description
-/geometry/source input.tg
-# construct the detector
-/run/intialize
-# export detector geometry as GDML for analysis/visualization in other tools
-/geometry/export output.gdml
-~~~
+
+You can find a concrete example in [example/detector/GDML](GDML).
 
 #### Sensitive detector
 
@@ -249,7 +257,7 @@ Note that physics volumes from the same logical volume created by the text geome
 [GEARS]: http://physino.xyz/gears
 [tg]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomASCII.html
 [Geant4]: http://geant4.cern.ch
-[NIST]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html#g4matrdb
+[NIST]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html
 [run]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_run_.html
 [listMaterials]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Control/AllResources/Control/UIcommands/_material_nist_.html
 [G4OpBoundaryProcess]: http://www-geant4.kek.jp/lxr/source//processes/optical/include/G4OpBoundaryProcess.hh
