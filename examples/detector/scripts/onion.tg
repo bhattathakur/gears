@@ -1,0 +1,38 @@
+:volu world BOX 100*cm 100*cm 100*cm G4_Galactic
+:vis world OFF
+
+:rotm r000 180 0 0
+
+:volu sphere0 SPHERE 0 10 0 360 0 90 G4_Galactic
+:place sphere0 1 world r000 0 0 0
+:color sphere0 0.75 0.3 0.3
+:volu sphere1 SPHERE 10 20 0 360 0 90 G4_Galactic
+:place sphere1 1 world r000 0 0 0
+:color sphere1 0.75 0.3 0.3
+:volu sphere2 SPHERE 20 30 0 360 0 90 G4_Galactic
+:place sphere2 1 world r000 0 0 0
+:color sphere2 0.75 0.3 0.3
+:volu sphere3 SPHERE 30 40 0 360 0 90 G4_Galactic
+:place sphere3 1 world r000 0 0 0
+:color sphere3 0.75 0.3 0.3
+:volu sphere4 SPHERE 40 50 0 360 0 90 G4_Galactic
+:place sphere4 1 world r000 0 0 0
+:color sphere4 0.75 0.3 0.3
+:volu sphere5 SPHERE 50 60 0 360 0 90 G4_Galactic
+:place sphere5 1 world r000 0 0 0
+:color sphere5 0.75 0.3 0.3
+:volu sphere6 SPHERE 60 70 0 360 0 90 G4_Galactic
+:place sphere6 1 world r000 0 0 0
+:color sphere6 0.75 0.3 0.3
+:volu sphere7 SPHERE 70 80 0 360 0 90 G4_Galactic
+:place sphere7 1 world r000 0 0 0
+:color sphere7 0.75 0.3 0.3
+:volu sphere8 SPHERE 80 90 0 360 0 90 G4_Galactic
+:place sphere8 1 world r000 0 0 0
+:color sphere8 0.75 0.3 0.3
+:volu sphere9 SPHERE 90 100 0 360 0 90 G4_Galactic
+:place sphere9 1 world r000 0 0 0
+:color sphere9 0.75 0.3 0.3
+:volu sphere10 SPHERE 100 110 0 360 0 90 G4_Galactic
+:place sphere10 1 world r000 0 0 0
+:color sphere10 0.75 0.3 0.3
