@@ -8,7 +8,7 @@
 /vis/viewer/set/background ! ! ! 
 /vis/viewer/set/upThetaPhi 10 0
 /vis/viewer/set/viewpointThetaPhi 60 0
-/vis/viewer/set/style surface
+/vis/viewer/set/style wireframe
 /vis/drawVolume
 /vis/viewer/refresh
 /vis/rayTracer/trace test.jpeg
