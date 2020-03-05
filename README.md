@@ -1,13 +1,21 @@
-[![Documentation](https://codedocs.xyz/jintonic/gears.svg)](https://codedocs.xyz/jintonic/gears/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Code size](https://img.shields.io/github/languages/code-size/jintonic/gears.svg?style=flat)
-![Languages](https://img.shields.io/github/languages/top/jintonic/gears.svg?style=flat)
+[![Doxygen](https://codedocs.xyz/jintonic/gears.svg)](https://codedocs.xyz/jintonic/gears/annotated.html)
+[![License:MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Examples](https://img.shields.io/badge/gears-examples-blue?style=flat)](examples)
+[![Get Started](https://img.shields.io/badge/get-started-orange?style=flat)](#getting-started)
+[![Get Involved](https://img.shields.io/badge/get-involved-ff69b4?style=flat)](#how-to-contribute)
 
-[GEARS][] is a [Geant4][] [Example Application](https://geant4.kek.jp/lxr/source/examples/) with [Rich features](#features) yet Small footprint. The entire C++ coding is minimized down to a single file with about 600 [SLOC][]. This is achieved mainly by utilizing [Geant4][] plain [text geometry description][tg], [built-in UI commands][TUI] (macros), and C++ inheritance. It is ideal for student training and fast implementation of small to medium-sized experiments.
+[GEARS][] is a [Geant4][] [Example][] Application with [Rich features](#features) yet Small footprint. The entire C++ coding is minimized down to a single file with about 600 [SLOC][]. This is achieved mainly by utilizing [Geant4][] plain [text geometry description][tg], [built-in UI commands][TUI] (macros), and C++ inheritance. It is ideal for student training and fast implementation of small to medium-sized experiments.
+
+[GEARS]: https://github.com/jintonic/gears
+[Geant4]: http://geant4.cern.ch
+[Example]:{{site.g4doc}}/Examples/examples.html
+[tg]: {{site.g4doc}}/Detector/Geometry/geomASCII.html
+[TUI]: {{site.g4doc}}/Control/commands.html
+[SLOC]: https://en.wikipedia.org/wiki/Source_lines_of_code
 
 ## Features
 
-* [Single small C++ file](https://github.com/jintonic/gears/blob/master/gears.cc), easy to manage, fast to [compile](#compilation)(a few second on a regular PC)
+* [Single small C++ file]({{site.file}}/gears.cc), easy to manage, fast to [compile](#compilation)(a few second on a regular PC)
 * [Output in multiple data format](examples/output)
   * [ROOT](examples/output#root) TTree format (default, no [ROOT][] installation is needed)
     * Build-in data compression, well suitable for large data processing
@@ -26,12 +34,12 @@
   * Turn any volume to a [sensitive detector](examples/detector#sensitive-detector) by adding "(S)" in its name
   * Assign optical properties in [Geant4][] plain [text geometry description][tg]
 * Optional optical and hadronic [physics](examples/physics)
-* Periodic status report in a long run
 * Frequently used source spectra (AmBe, Am-241, etc.) in addition to [GPS][]
 * [Doxygen documentation](https://codedocs.xyz/jintonic/gears/)
 * Many [sample macros](examples) and [geometry descriptions](examples/detector#detector-construction) for feature demonstration
 
-[GPS]:http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/GettingStarted/generalParticleSource.html
+[ROOT]: https://root.cern.ch
+[GPS]:{{site.g4doc}}/GettingStarted/generalParticleSource.html
 
 ## Getting started
 
@@ -68,7 +76,7 @@ Note that if you change some files in your local copy, the `git pull` command wi
 
 ### Compilation
 
-[GEARS][] is shipped with a simple [makefile](https://github.com/jintonic/gears/blob/master/makefile). Simply type `make` to compile [gears.cc](https://github.com/jintonic/gears/blob/master/gears.cc) to generate a tiny executable `gears`:
+[GEARS][] is shipped with a simple [makefile]({{site.file}}/makefile). Simply type `make` to compile [gears.cc]({{site.file}}/gears.cc) to generate a tiny executable `gears`:
 
 ```sh
 $ cd /path/to/gears
@@ -146,7 +154,7 @@ You can initiate a [pull request on GitHub](https://help.github.com/en/github/co
 
 #### Indentation
 
-Two spaces instead of a tab are used to indent a line in [gears.cc](https://github.com/jintonic/gears/blob/master/gears.cc) to insure a consistent appearance in different text editors, and to avoid wasting space in font of deeply nested code blocks. The following mode lines are added to the end of [gears.cc](https://github.com/jintonic/gears/blob/master/gears.cc) to insure that in [Vim][] and [Emacs][]:
+Two spaces instead of a tab are used to indent a line in [gears.cc]({{site.file}}/gears.cc) to insure a consistent appearance in different text editors, and to avoid wasting space in font of deeply nested code blocks. The following mode lines are added to the end of [gears.cc]({{site.file}}/gears.cc) to insure that in [Vim][] and [Emacs][]:
 
 ```cpp
 // -*- C++; indent-tabs-mode:nil; tab-width:2 -*-
@@ -165,12 +173,6 @@ Two spaces instead of a tab are used to indent a line in [gears.cc](https://gith
 - new functions
   - time chopping of radioactive decay chain
 
-[GEARS]: https://github.com/jintonic/gears
-[tg]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomASCII.html
-[TUI]: http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Control/commands.html
-[SLOC]: https://en.wikipedia.org/wiki/Source_lines_of_code
-[ROOT]: https://root.cern.ch
-[Geant4]: http://geant4.cern.ch
 [G4UserSteppingAction]:http://www-geant4.kek.jp/lxr/source/tracking/include/G4UserSteppingAction.hh
 [GDML]: https://gdml.web.cern.ch/GDML/
 [HDF5]: https://www.hdfgroup.org/downloads/hdf5/

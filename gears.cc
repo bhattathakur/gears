@@ -27,7 +27,7 @@ class Output : public G4SteppingVerbose
     vector<int> pdg;   ///< PDG encoding
     vector<int> mom;   ///< parent particle's PDG encoding
     vector<double> e;  ///< energy deposited [keV]
-    vector<double> k;  ///< kinetic energy of the track [keV]
+    vector<double> k;  ///< kinetic energy [keV]
     vector<double> t;  ///< local time [ns]
     vector<double> x;  ///< local x [mm]
     vector<double> y;  ///< local y [mm]
@@ -47,7 +47,7 @@ class Output : public G4SteppingVerbose
 Output::Output(): G4SteppingVerbose()
 {
   auto manager = G4AnalysisManager::Instance();
-  manager->CreateNtuple("t", "Geant4 track points");
+  manager->CreateNtuple("t", "Geant4 step points");
   manager->CreateNtupleIColumn("trk", trk);
   manager->CreateNtupleIColumn("stp", stp);
   manager->CreateNtupleIColumn("vlm", vlm);
@@ -79,7 +79,7 @@ void Output::Record()
   int copyNo=handle->GetReplicaNumber();
   if (copyNo<=0) return; //skip uninteresting volumes
   if (trk.size()>=10000) {
-    G4cout<<"GEARS: # of track points >=10000. Recording stopped."<<G4endl;
+    G4cout<<"GEARS: # of step points >=10000. Recording stopped."<<G4endl;
     fTrack->SetTrackStatus(fKillTrackAndSecondaries);
     return;
   }
@@ -124,8 +124,8 @@ void Output::Record()
 void Output::Reset()
 {
   trk.clear(); stp.clear(); vlm.clear(); pro.clear(); pdg.clear(); mom.clear();
-  e.clear(); k.clear(); x.clear(); y.clear(); z.clear(); l.clear(); et.clear();
-  x0.clear(); y0.clear(); z0.clear(); t0.clear();
+  e.clear(); k.clear(); x.clear(); y.clear(); z.clear(); t.clear(); l.clear();
+  et.clear(); x0.clear(); y0.clear(); z0.clear(); t0.clear();
 }
 //______________________________________________________________________________
 //
@@ -569,29 +569,23 @@ class Generator : public G4VUserPrimaryGeneratorAction
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction() : G4UserRunAction() {};
-    void BeginOfRunAction (const G4Run* run);///< Print # of evts
-    void EndOfRunAction (const G4Run* run); ///< Close output file
+    void BeginOfRunAction (const G4Run*);///< Open output file
+    void EndOfRunAction (const G4Run*);  ///< Close output file
 };
 //______________________________________________________________________________
 //
 #include <G4Run.hh>
-void RunAction::BeginOfRunAction (const G4Run* run)
+void RunAction::BeginOfRunAction(const G4Run*)
 { 
-  G4cout<<"GEARS: "<<run->GetNumberOfEventToBeProcessed()
-    <<" events to be processed"<<G4endl;
   auto a = G4AnalysisManager::Instance();
-  if (a->GetFileName()=="") a->OpenFile("output");
-  else a->OpenFile();
+  if (a->GetFileName()!="") a->OpenFile();
 }
 //______________________________________________________________________________
 //
-void RunAction::EndOfRunAction (const G4Run* run)
+void RunAction::EndOfRunAction(const G4Run*)
 {
-  G4cout<<"GEARS: In total, "<<run->GetNumberOfEvent()
-    <<" events simulated"<<G4endl;
   auto a = G4AnalysisManager::Instance();
-  a->Write(); a->CloseFile();
+  if (a->GetFileName()!="") { a->Write(); a->CloseFile(); }
 }
 //______________________________________________________________________________
 //
@@ -603,31 +597,15 @@ void RunAction::EndOfRunAction (const G4Run* run)
 class EventAction : public G4UserEventAction, public G4UImessenger
 {
   public:
-    EventAction();
-    ~EventAction() { delete fCmd; }
     void BeginOfEventAction(const G4Event*); ///< Prepare for recording
-    void EndOfEventAction(const G4Event* event); ///< Save tree
-    void SetNewValue(G4UIcommand* cmd, G4String value)
-    { if (cmd==fCmd) fN2report=atoi(value); } ///< for G4UI
-  private:
-    int fN2report;///< Number of events to report
-    G4UIcmdWithAnInteger* fCmd;
+    void EndOfEventAction(const G4Event*);   ///< Fill n-tuple
 };
-//______________________________________________________________________________
-//
-EventAction::EventAction()
-  : G4UserEventAction(), G4UImessenger(), fN2report(1000)
-{
-  fCmd = new G4UIcmdWithAnInteger("/run/statusReport",this);
-  fCmd->SetGuidance("enable status report after [number of events]");
-  fCmd->SetParameterName("number of events",true);
-  fCmd->SetDefaultValue(fN2report);
-}
 //______________________________________________________________________________
 //
 #include <G4EventManager.hh>
 void EventAction::BeginOfEventAction(const G4Event*)
 {
+  auto a = G4AnalysisManager::Instance(); if (a->GetFileName()=="") return;
   // turn on the use of G4SteppingVerbose for recording, but silently
   if (fpEventManager->GetTrackingManager()->GetVerboseLevel()==0) {
     fpEventManager->GetTrackingManager()->SetVerboseLevel(1);
@@ -638,11 +616,10 @@ void EventAction::BeginOfEventAction(const G4Event*)
 }
 //______________________________________________________________________________
 //
-void EventAction::EndOfEventAction(const G4Event* event)
+void EventAction::EndOfEventAction(const G4Event*)
 {
-  int id=event->GetEventID()+1;
-  if (id%fN2report==0) G4cout<<"GEARS: "<<id<<" events simulated"<<G4endl;
-  G4AnalysisManager::Instance()->AddNtupleRow(); // save event data
+  auto a = G4AnalysisManager::Instance();
+  if (a->GetFileName()!="") a->AddNtupleRow();
 }
 //______________________________________________________________________________
 //
