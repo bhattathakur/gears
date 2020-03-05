@@ -1,0 +1,32 @@
+// Define a parameter for later use
+:P POSZ 50*cm
+:P THICKNESS 4*cm
+
+// Define rotation matrix
+:ROTM R00 1. 0. 0. 0. 1. 0. 0. 0. 1.  // unit matrix
+:ROTM R60 0. 0. 0. //60 degree with z axis
+
+// Define volumes and place them
+:VOLU world BOX 2*m 2*m 3*$POSZ G4_AIR
+:VIS world OFF
+
+//Creating a cube and three other boxes 
+:SOLID cube BOX $POSZ $POSZ $POSZ                            //x,y,z
+:SOLID cubeX BOX $POSZ+$THICKNESS $POSZ-2*$THICKNESS $POSZ-2*$THICKNESS //x, y-2*thickness,z-2*thickness 
+:SOLID cubeY BOX $POSZ-1.99*$THICKNESS $POSZ+2*$THICKNESS $POSZ-1.99*$THICKNESS //x-2*thickness,y,z-2*thickness
+:SOLID cubeZ BOX $POSZ-2.01*$THICKNESS $POSZ-2.01*$THICKNESS $POSZ+3*$THICKNESS //x-2*thickness,y-2*thickness,z
+
+//Subtracing a box along x from cube
+:SOLID boxx SUBTRACTION cube cubeX R00 0. 0. 0
+
+
+//Subtracing a box along y from boxx
+:SOLID boxy SUBTRACTION boxx cubeY R00 0. 0. 0
+
+//Subtracing a box along z from boxy
+:SOLID boxz SUBTRACTION boxy cubeZ R00 0. 0. 0
+
+
+:VOLU  cubicframe boxz G4_Fe                //logical volume
+:PLACE cubicframe 1 world R60 0. 0. 0       //physical volume
+:COLOR cubicframe 0.52 0.52 0.52            //grey color
