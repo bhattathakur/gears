@@ -1,0 +1,5 @@
+git remote -v  			//gives the information about the upstream and origin
+git fetch --dry-run 		//shows what will be done without actually doing it
+git fetch upstream 		// Fetch the updates and commits from the upstream branches which is stored in the local branch upstream/master
+git merge upstream/master   	//merge the contents without destroying local changes
+
