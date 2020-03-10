@@ -9,8 +9,8 @@
 /run/initialize
 
 # change particle and its energy here
-/gps/particle gamma
-/gps/energy 2.6 MeV
+/gps/particle Beta   #gamma    alpha
+/gps/energy   2.6 MeV # 2.6 MeV 6.0 MeV
 /gps/position -45 0 0 cm
 #45 cm towards the negative x-axis
 
