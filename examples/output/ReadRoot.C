@@ -5,6 +5,7 @@
 	TString target="Ge";   //Target Material
 		
 	TString filename="output";   //given filename
+	//output.root is created by running radiate.mac with gears application
 	TFile *file = new TFile(filename+".root");//opening the output root file
 	//t->Show(0); //showing the event 1
 	TCanvas *can=new TCanvas("c","c",1000,2000);
@@ -28,19 +29,19 @@
 	//Adding a legend 
 	auto legend=new TLegend(0.7,0.2,0.9,0.3);
 	legend->AddEntry(htemp,"histogram for x","l");
-	legend->AddEntry(h,"histogram for x for particle with pdg="+pdg,"l");
+	legend->AddEntry(h,"histogram for x for particle #"+particle,"l");
 	legend->Draw();
-	gPad->SetFillColor(20);//color of this pad
+//	gPad->SetFillColor(20);//color of this pad
 
 	//pad 2
 	can->cd(2);
 	t->Draw("z:y");
-	gPad->SetFillColor(33);//color of this pad
+//	gPad->SetFillColor(33);//color of this pad
 	//gPad->Modified();
 	//gPad->Update();
 	//TGraph *f = (TGraph*)(gPad->GetPrimitive("Graph"))->Clone();
 	//f->SetTitle("testing;;");
-	can->SetFillColor(17);
+//	can->SetFillColor(17);
 	can->SaveAs(filename+particle+target+".png")
 
 }
