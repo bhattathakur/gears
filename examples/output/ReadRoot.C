@@ -28,7 +28,7 @@
 	
 	//Adding a legend 
 	auto legend=new TLegend(0.7,0.2,0.9,0.3);
-  legend->AddEntry(htemp,"histogram for x","l");
+	legend->AddEntry(htemp,"histogram for x","l");
 	legend->AddEntry(h,"histogram for x for particle #"+particle,"l");
 	legend->Draw();
 //	gPad->SetFillColor(20);//color of this pad

@@ -12,4 +12,4 @@
 /vis/viewer/set/style surface
 /vis/drawVolume
 /vis/viewer/refresh
-#/vis/rayTracer/trace gears.jpeg
+#/vis/rayTracer/trace demogears.jpeg
