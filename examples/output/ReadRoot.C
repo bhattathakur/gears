@@ -1,8 +1,19 @@
 {
 	gROOT->Reset();
-	TString pdg="22"; //pdg number for the incident particle
+	TString target="NaI";   //Target Material
+
+  //alpha particle
+//	TString pdg="1000020040";     //pdg number for the incident alpha particle
+//	TString particle="alpha";     //Incident Particle
+//
+  //beta particle
+//	TString pdg="11";            //pdg number for the incident beta particle
+//	TString particle="beta";     //Incident Particle
+  
+  //gamma particle
+	TString pdg="22";             //pdg number for the incident gamma particle
 	TString particle="gamma";     //Incident Particle
-	TString target="Ge";   //Target Material
+//
 		
 	TString filename="output";   //given filename
 	//output.root is created by running radiate.mac with gears application
