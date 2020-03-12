@@ -1,4 +1,8 @@
+<<<<<<< HEAD:examples/detector/boolean/frame.mac
 /geometry/source cubicframe.tg
+=======
+/geometry/source frame1.tg
+>>>>>>> upstream/master:examples/detector/boolean/frame1.mac
 
 /run/initialize
 
@@ -21,4 +25,3 @@
 /vis/open HepRepFile
 /vis/drawVolume
 /vis/viewer/flush
-
