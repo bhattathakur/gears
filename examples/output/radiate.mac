@@ -15,7 +15,7 @@
 #/gps/energy   6.0 MeV     
 
 #beta particle
-/gps/particle gamma          
+#/gps/particle gamma          
 #/gps/energy   4.0 MeV     
 
 #gamma particle 
@@ -23,7 +23,9 @@
 #/gps/energy   2.6 MeV     
 
 #same energy to all
+/gps/particle gamma
 /gps/energy 5. MeV
+
 /gps/position -45 0 0 cm
 #45 cm towards the negative x-axis
 
