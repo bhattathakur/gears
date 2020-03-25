@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # get the latest g4_??.wrl
 for each in `ls *.wrl 2>&1`; do latest=$each; done

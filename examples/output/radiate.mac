@@ -23,7 +23,7 @@
 #/gps/energy   2.6 MeV     
 
 #same energy to all
-/gps/particle gamma
+/gps/particle alpha
 /gps/energy 5. MeV
 
 /gps/position -45 0 0 cm

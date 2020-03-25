@@ -1,18 +1,18 @@
 {
 	gROOT->Reset();
-	TString target="NaI";   //Target Material
+	TString target="CsI";   //Target Material
 
   //alpha particle
 //	TString pdg="1000020040";     //pdg number for the incident alpha particle
 //	TString particle="alpha";     //Incident Particle
 //
   //beta particle
-//	TString pdg="11";            //pdg number for the incident beta particle
-//	TString particle="beta";     //Incident Particle
+	TString pdg="11";            //pdg number for the incident beta particle
+	TString particle="beta";     //Incident Particle
   
   //gamma particle
-	TString pdg="22";             //pdg number for the incident gamma particle
-	TString particle="gamma";     //Incident Particle
+//	TString pdg="22";             //pdg number for the incident gamma particle
+//	TString particle="gamma";     //Incident Particle
 //
 		
 	TString filename="output";   //given filename
