@@ -1,7 +1,13 @@
 # print macro commands on screen
 /control/verbose 1
 # geometry must be specified before /run/initialize
-/geometry/source air.tg
+/geometry/source CsI.tg
+# select a physics list defined in
+# https://geant4.kek.jp/lxr/source/physics_lists/lists/src/G4PhysListFactory.cc#L83
+# LBE: low background experiment (maximal step length: 1 um)
+# LIV: Livermore data based EM models
+# comment out the following line and run again to see the difference
+/physics_lists/select LBE_LIV
 
 # initialize geometry and physics
 /run/initialize
@@ -26,7 +32,7 @@
 /vis/disable
 /tracking/verbose 0
 # turn on data recording
-/analysis/setFileName air
+/analysis/setFileName CsI
 # turn on progress report
 /run/verbose 2
 /run/printProgress 1000
